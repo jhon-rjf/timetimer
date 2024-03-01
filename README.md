@@ -1,4 +1,4 @@
-#TimeTimer 집중력시계.
+# TimeTimer 집중력시계.
 
 My timetimer broke down, so I made this web.
 I got help from ai coding because my skills are not good enough.
