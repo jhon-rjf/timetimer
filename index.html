@@ -5,6 +5,7 @@
 </head>
 <body>
     <div class="input">
+        <h1>집중력시계/Timetimer</h1>
         <input type="number" id="totalTime" placeholder="몇 분 집중할래요?">
     </div>
         <button id="startButton" onclick="startTimer()">start</button>
@@ -17,6 +18,10 @@
 </html>
 <style>
     
+    h1{
+        font-size: 38px;
+        font
+    }
 canvas{
     position: fixed;
     top: 100px;
@@ -28,6 +33,7 @@ html{
 }
 .input{
   input {
+    text-align: center;
     position: fixed;
     top: 500px;
     display: block;
@@ -44,6 +50,7 @@ html{
 #startButton {
     position: fixed;
     top: 560px;
+    left: 40px;
     box-shadow: -5px -5px 10px #fff, 5px 5px 8px #babebc;
   border-radius: 20px;
   border: none;
@@ -60,7 +67,7 @@ html{
 #resetButton {
     position: fixed;
     top: 560px;
-    left: 170px;
+    left: 210px;
     box-shadow: -5px -5px 10px #fff, 5px 5px 8px #babebc;
   border-radius: 20px;
   border: none;
