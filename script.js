@@ -1,16 +1,23 @@
+var timer; // 타이머를 제어하기 위한 전역 변수 선언
+
 function startTimer() {
     var ctx = document.getElementById('myCanvas').getContext('2d');
     var inputTime = document.getElementById('totalTime').value * 60; // 사용자가 입력한 시간을 초로 변환
     var totalTime = 59 * 60; // 전체 시간을 59분(3540초)으로 설정
     var elapsedTime = 0; // 경과 시간
 
+    document.getElementById('startButton').disabled = true; // 타이머 시작 후 시작 버튼 비활성화
+    document.getElementById('resetButton').disabled = false; // 초기화 버튼 활성화
+
+    if(timer) {
+        clearInterval(timer); // 기존에 실행중인 타이머가 있다면 종료
+    }
+
     // 타이머 시작
-    var timer = setInterval(function() {
+    timer = setInterval(function() {
         elapsedTime++; // 경과 시간 증가
         var remainingTime = inputTime - elapsedTime; // 남은 시간 (초)
         remainingTime = Math.max(remainingTime, 0); // 남은 시간이 음수가 되지 않도록 조정
-        var remainingMinutes = Math.floor(remainingTime / 60); // 남은 분
-        var remainingSeconds = remainingTime % 60; // 남은 초
 
         // 캔버스 클리어
         ctx.clearRect(0, 0, 400, 400);
@@ -35,32 +42,23 @@ function startTimer() {
             ctx.fill();
         }
 
-        // 눈금과 분 표시 (0부터 55분까지 5분 간격)
-      for(let i = 0; i <= 11; i++) {
+        // 눈금 촘촘하게 표시
+        for(let i = 0; i < 12; i++) { // 기존 눈금
             const angle = startAngle + (Math.PI * 2) * (i / 12);
-            const x1 = 200 + 100 * Math.cos(angle);
-            const y1 = 200 + 100 * Math.sin(angle);
-            const x2 = 200 + 110 * Math.cos(angle);
-            const y2 = 200 + 110 * Math.sin(angle);
-            
-            // 눈금 그리기
-            ctx.beginPath();
-            ctx.moveTo(x1, y1);
-            ctx.lineTo(x2, y2);
-            ctx.strokeStyle = 'black';
-            ctx.stroke();
-            
-            // 분 숫자 표시 (0부터 55분까지 5분 간격)
-            const textX = 200 + 125 * Math.cos(angle);
-            const textY = 200 + 125 * Math.sin(angle) + 5; // 숫자가 조금 위로 올라가도록 조정
-            ctx.font = "12px Arial";
-            ctx.fillStyle = "black";
-            ctx.textAlign = "center";
-            ctx.fillText(i * 5, textX, textY); // 0부터 55까지 5분 간격으로 표시
+            drawTick(ctx, angle, 100, 110); // 눈금 그리기
+            drawTickText(ctx, angle, i * 5); // 눈금 텍스트 그리기
         }
-        // 이 부분은 변경 없음...
 
-        // 남은 시간을 분:초 형식으로 표시 (사용자가 입력한 시간 기준으로 변경)
+        for(let i = 0; i < 60; i++) { // 추가 눈금
+            if(i % 5 !== 0) { // 기존 눈금 위치를 제외
+                const angle = startAngle + (Math.PI * 2) * (i / 60);
+                drawTick(ctx, angle, 100, 105); // 더 작은 눈금 그리기
+            }
+        }
+
+        // 남은 시간을 분:초 형식으로 표시
+        var remainingMinutes = Math.floor(remainingTime / 60);
+        var remainingSeconds = remainingTime % 60;
         ctx.font = "20px Arial";
         ctx.fillStyle = "black";
         ctx.textAlign = "center";
@@ -70,6 +68,41 @@ function startTimer() {
         if(remainingTime <= 0) {
             clearInterval(timer); // 타이머 종료
             alert("입력한 시간이 종료되었습니다!");
+            document.getElementById('startButton').disabled = false; // 시작 버튼 다시 활성화
+            document.getElementById('resetButton').disabled = true; // 초기화 버튼 비활성화
         }
     }, 1000); // 1초마다 업데이트
+}
+
+function resetTimer() {
+    clearInterval(timer); // 진행 중인 타이머 종료
+    var ctx = document.getElementById('myCanvas').getContext('2d');
+    ctx.clearRect(0, 0, 400, 400); // 캔버스 클리어
+    document.getElementById('totalTime').value = ''; // 입력 필드 초기화
+    document.getElementById('startButton').disabled = false; // 시작 버튼 활성화
+    document.getElementById('resetButton').disabled = true; // 초기화 버튼 비활성화
+}
+
+// 눈금 그리는 함수
+function drawTick(ctx, angle, startRadius, endRadius) {
+    const x1 = 200 + startRadius * Math.cos(angle);
+    const y1 = 200 + startRadius * Math.sin(angle);
+    const x2 = 200 + endRadius * Math.cos(angle);
+    const y2 = 200 + endRadius * Math.sin(angle);
+    
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = 'black';
+    ctx.stroke();
+}
+
+// 눈금 텍스트 그리는 함수
+function drawTickText(ctx, angle, text) {
+    const textX = 200 + 125 * Math.cos(angle);
+    const textY = 200 + 125 * Math.sin(angle) + 5;
+    ctx.font = "12px Arial";
+    ctx.fillStyle = "black";
+    ctx.textAlign = "center";
+    ctx.fillText(text, textX, textY);
 }

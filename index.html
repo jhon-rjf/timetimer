@@ -6,7 +6,8 @@
 <body>
     <label for="totalTime">전체 시간 (분): </label>
     <input type="number" id="totalTime" placeholder="전체 시간을 입력하세요">
-    <button onclick="startTimer()">타이머 시작</button>
+    <button id="startButton" onclick="startTimer()">타이머 시작</button>
+    <button id="resetButton" onclick="resetTimer()" disabled>초기화</button>
     <canvas id="myCanvas" width="400" height="400"></canvas>
 
     <script src="script.js"></script>
