@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="ko"> 
+<html>
 <head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹 디자인을 위한 뷰포트 설정 -->
-    <title>Time Timer with Tick Marks</title> <!-- 웹 페이지 제목 설정 -->
-    <link rel="stylesheet" href="style.css"> <!-- 외부 CSS 파일(style.css) 연결 -->
+    <title>실시간 원 그래프 타이머</title>
 </head>
 <body>
-    <div class="circle-container"> <!-- 원형 타이머와 눈금을 담을 컨테이너 -->
-        <div class="circle"> <!-- 원형 타이머를 표시할 div -->
-            <div class="timer" id="timer">00:00</div> <!-- 타이머 시간을 표시할 div, 초기값은 00:00 -->
-        </div>
-    </div>
-    <script src="script.js"></script> <!-- 외부 JavaScript 파일(script.js) 연결 -->
+    <label for="totalTime">전체 시간 (분): </label>
+    <input type="number" id="totalTime" placeholder="전체 시간을 입력하세요">
+    <button onclick="startTimer()">타이머 시작</button>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+
+    <script src="script.js"></script>
 </body>
 </html>
