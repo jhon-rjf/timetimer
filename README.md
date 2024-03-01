@@ -2,7 +2,9 @@
 
 My timetimer broke down, so I made this web.
 I got help from ai coding because my skills are not good enough.
+
 제가 사용하던 timetimer이 고장나서 또사기 아까워서 프로그램으로 직접 만들어봤습니다.
+
 서툰 실력으로 ai 코딩의 도움을 얻어가며 했습니다.
 
 ### 1. 실행화면
