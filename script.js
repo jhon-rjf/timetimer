@@ -2,7 +2,7 @@ var timer; // 타이머를 제어하기 위한 전역 변수 선언
 
 function startTimer() {
     var ctx = document.getElementById('myCanvas').getContext('2d');
-    var inputMinutes = parseInt(document.getElementById('totalTime').value, 10); // 사용자가 입력한 시간을 정수로 변환
+   var inputMinutes = parseInt(document.getElementById('totalTime').value, 10); // 사용자가 입력한 시간을 정수로 변환
    
     // 입력값 검증
     if (isNaN(inputMinutes) || inputMinutes < 1 || inputMinutes > 60) {
@@ -55,14 +55,14 @@ function startTimer() {
         // 눈금 촘촘하게 표시
         for(let i = 0; i < 12; i++) { // 기존 눈금
             const angle = startAngle + (Math.PI * 2) * (i / 12);
-            drawTick(ctx, angle, 100, 110); // 눈금 그리기
+            drawTick(ctx, angle, 100, 70); // 눈금 그리기
             drawTickText(ctx, angle, i * 5); // 눈금 텍스트 그리기
         }
 
         for(let i = 0; i < 60; i++) { // 추가 눈금
             if(i % 5 !== 0) { // 기존 눈금 위치를 제외
                 const angle = startAngle + (Math.PI * 2) * (i / 60);
-                drawTick(ctx, angle, 100, 105); // 더 작은 눈금 그리기
+                drawTick(ctx, angle, 90, 100); // 더 작은 눈금 그리기
             }
         }
 
@@ -110,8 +110,8 @@ function drawTick(ctx, angle, startRadius, endRadius) {
 // 눈금 텍스트 그리는 함수
 function drawTickText(ctx, angle, text) {
     const textX = 200 + 125 * Math.cos(angle);
-    const textY = 200 + 125 * Math.sin(angle) + 5;
-    ctx.font = "12px Arial";
+    const textY = 200 + 125 * Math.sin(angle) +10;
+    ctx.font = "30px Arial";
     ctx.fillStyle = "black";
     ctx.textAlign = "center";
     ctx.fillText(text, textX, textY);

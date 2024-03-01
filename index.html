@@ -4,12 +4,75 @@
     <title>실시간 원 그래프 타이머</title>
 </head>
 <body>
-    <label for="totalTime">전체 시간 (분): </label>
-    <input type="number" id="totalTime" placeholder="전체 시간을 입력하세요">
-    <button id="startButton" onclick="startTimer()">타이머 시작</button>
-    <button id="resetButton" onclick="resetTimer()" disabled>초기화</button>
+    <div class="input">
+        <input type="number" id="totalTime" placeholder="몇 분 집중할래요?">
+    </div>
+        <button id="startButton" onclick="startTimer()">start</button>
+        <button id="resetButton" onclick="resetTimer()" disabled>reset</button>
+    
     <canvas id="myCanvas" width="400" height="400"></canvas>
 
     <script src="script.js"></script>
 </body>
 </html>
+<style>
+    
+canvas{
+    position: fixed;
+    top: 100px;
+    left: 12px;
+
+}
+html{
+    background-color: #ebecf0;
+}
+.input{
+  input {
+    position: fixed;
+    top: 500px;
+    display: block;
+  background: #eee;
+  padding: 16px;
+  margin: 8px 0;
+  width: 368px;
+  border: 0;
+  outline: none;
+  border-radius: 20px;
+  box-shadow: inset 7px 2px 10px #babebc, inset -5px -5px 12px #fff;
+}
+}
+#startButton {
+    position: fixed;
+    top: 560px;
+    box-shadow: -5px -5px 10px #fff, 5px 5px 8px #babebc;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 15px 45px;
+  margin: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 80ms ease-in;
+}
+#resetButton {
+    position: fixed;
+    top: 560px;
+    left: 170px;
+    box-shadow: -5px -5px 10px #fff, 5px 5px 8px #babebc;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 15px 45px;
+  margin: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 80ms ease-in;
+}
+
+</style>
