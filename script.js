@@ -2,8 +2,18 @@ var timer; // 타이머를 제어하기 위한 전역 변수 선언
 
 function startTimer() {
     var ctx = document.getElementById('myCanvas').getContext('2d');
-    var inputTime = document.getElementById('totalTime').value * 60; // 사용자가 입력한 시간을 초로 변환
-    var totalTime = 59 * 60; // 전체 시간을 59분(3540초)으로 설정
+    var inputMinutes = parseInt(document.getElementById('totalTime').value, 10); // 사용자가 입력한 시간을 정수로 변환
+   
+    // 입력값 검증
+    if (isNaN(inputMinutes) || inputMinutes < 1 || inputMinutes > 60) {
+        alert("시간은 1분 이상 60분 이하로 입력해 주세요.");
+        document.getElementById('totalTime').value = ''; // 입력 필드 초기화
+        document.getElementById('startButton').disabled = false; // '시작' 버튼을 다시 활성화
+        return; // 함수 실행 중지
+    }
+
+    var inputTime = inputMinutes * 60; // 사용자가 입력한 시간을 초로 변환
+    var totalTime = 60 * 60; // 전체 시간을 60분(3600초)으로 설정
     var elapsedTime = 0; // 경과 시간
 
     document.getElementById('startButton').disabled = true; // 타이머 시작 후 시작 버튼 비활성화
